@@ -1,0 +1,267 @@
+/* ------------------------------------------------------------------ */
+/* Landing page — Hero section                                        */
+/* ------------------------------------------------------------------ */
+
+.hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 4.5rem 2rem 5rem;
+}
+
+.hero-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #e3f6ea;
+    color: #187a4c;
+    font-size: 0.8rem;
+    font-weight: 500;
+    padding: 0.4rem 1rem;
+    border-radius: 999px;
+    margin-bottom: 1.75rem;
+}
+
+.hero-badge-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #22c55e;
+    display: inline-block;
+}
+
+.hero-title {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: clamp(2.25rem, 5vw, 3.25rem);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: #12162a;
+    margin-bottom: 1.5rem;
+}
+
+.hero-title-accent {
+    color: #12a86b;
+}
+
+.hero-subtitle {
+    font-size: 1.05rem;
+    color: var(--ink-muted);
+    line-height: 1.7;
+    max-width: 460px;
+    margin-bottom: 2.25rem;
+}
+
+.hero-actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 3.5rem;
+}
+
+.hero-btn {
+    display: inline-block;
+    background: #12162a;
+    color: #ffffff;
+    padding: 0.75rem 1.75rem;
+    border-radius: 999px;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+
+.hero-btn:hover {
+    background: #1f2540;
+}
+
+/* ------------------------------------------------------------------ */
+/* Hero visual — dashboard preview card                                */
+/* ------------------------------------------------------------------ */
+
+.hero-visual {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.mock-card {
+    background: var(--paper-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    width: 100%;
+    max-width: 440px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.06);
+    text-align: left;
+}
+
+.mock-card-dots {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 1.25rem;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.dot-red { background: #ef4444; }
+.dot-yellow { background: #f59e0b; }
+.dot-green { background: #22c55e; }
+
+.stat-card {
+    border: 1px solid var(--border-soft);
+    border-radius: 12px;
+    padding: 0.9rem 1.1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    margin-bottom: 0.75rem;
+}
+
+.stat-label {
+    font-size: 0.8rem;
+    color: var(--ink-muted);
+}
+
+.stat-value {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: #12162a;
+}
+
+.stat-change {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--ink-faint);
+}
+
+.stat-change-negative { color: #dc2626; }
+.stat-change-positive { color: #16a34a; }
+
+.category-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    margin-top: 1.1rem;
+}
+
+.category-row {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.category-label {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #12162a;
+}
+
+.category-track {
+    height: 8px;
+    background: var(--border-soft);
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.category-fill {
+    height: 100%;
+    border-radius: 999px;
+}
+
+.category-fill-food { background: #f59e0b; width: 95%; }
+.category-fill-travel { background: #3b5bfd; width: 58%; }
+.category-fill-bills { background: #8b5cf6; width: 45%; }
+
+@media (max-width: 600px) {
+    .hero { padding: 3rem 1.25rem 3rem; }
+}
+
+/* ------------------------------------------------------------------ */
+/* "See how it works" video modal                                     */
+/* ------------------------------------------------------------------ */
+
+.modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 15, 15, 0.7);
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    z-index: 1000;
+}
+
+.modal-overlay.is-open {
+    display: flex;
+}
+
+.modal-content {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    background: var(--paper-card);
+    border-radius: var(--radius-md);
+    padding: 1rem;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+}
+
+.modal-close {
+    position: absolute;
+    top: -14px;
+    right: -14px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #12162a;
+    color: #ffffff;
+    border: none;
+    font-size: 1.1rem;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+}
+
+.modal-close:hover {
+    background: #1f2540;
+}
+
+.modal-video-wrap {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%;
+    border-radius: calc(var(--radius-md) - 4px);
+    overflow: hidden;
+    background: #000;
+}
+
+.modal-video-wrap iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
