@@ -1,0 +1,11 @@
+{
+  "name": "spendly-plugin",
+  "displayName": "Spendly Plugin",
+  "version": "2.0.0",
+  "description": "Claude Code plugin for Spendly — a Flask + SQLite personal expense tracker built with spec-driven development. Bundles 6 slash commands (create-spec, ship-feature, test-feature, code-review-feature, seed-user, seed-expense), 4 subagents (quality-reviewer, security-reviewer, test-writer, test-runner), 1 UI design skill (frontend-design), and 2 hooks (black formatter, production DB guard).",
+  "author": {
+    "name": "Arpan Ghosh"
+  },
+  "license": "MIT",
+  "keywords": ["spendly", "expense-tracker", "flask", "sqlite", "spec-driven-development"]
+}

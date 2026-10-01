@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+
+{% block title %}Reports — Spendly{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/reports.css') }}">
+{% endblock %}
+
+{% block content %}
+<section class="reports-section">
+
+    <div class="reports-header">
+        <div>
+            <h1 class="reports-title">Reports</h1>
+            <p class="reports-subtitle">A closer look at where your money goes</p>
+        </div>
+        <a href="{{ url_for('export_report', date_from=date_from, date_to=date_to) }}" class="btn-ghost reports-export-btn">Export CSV</a>
+    </div>
+
+    {% with messages = get_flashed_messages(category_filter=['error']) %}
+      {% for message in messages %}
+      <div class="auth-error">{{ message }}</div>
+      {% endfor %}
+    {% endwith %}
+
+    <div class="filter-bar">
+        <div class="filter-presets">
+            {% for preset in presets %}
+            <a href="{{ url_for('reports', date_from=preset.date_from, date_to=preset.date_to) }}"
+               class="filter-preset-btn{% if preset.active %} filter-preset-active{% endif %}">{{ preset.label }}</a>
+            {% endfor %}
+        </div>
+        <form method="GET" action="{{ url_for('reports') }}" class="filter-custom-form{% if is_custom %} filter-custom-active{% endif %}">
+            <div class="filter-field">
+                <label for="date_from">From</label>
+                <input type="date" id="date_from" name="date_from" class="filter-date-input" value="{{ date_from or '' }}">
+            </div>
+            <div class="filter-field">
+                <label for="date_to">To</label>
+                <input type="date" id="date_to" name="date_to" class="filter-date-input" value="{{ date_to or '' }}">
+            </div>
+            <button type="submit" class="btn-primary filter-apply-btn">Apply</button>
+        </form>
+    </div>
+
+    <div class="stats-row reports-stats-row">
+        <div class="stat-box">
+            <div class="stat-value">₹{{ "%.2f"|format(stats.total_spent) }}</div>
+            <div class="stat-label">Total spent</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-value">₹{{ "%.2f"|format(stats.daily_avg) }}</div>
+            <div class="stat-label">Daily average</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-value">{{ categories|length }}</div>
+            <div class="stat-label">Categories tracked</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-value">{{ stats.top_category }}</div>
+            <div class="stat-label">Top category</div>
+        </div>
+    </div>
+
+    <div class="profile-card reports-trend-card">
+        <div class="profile-card-title">Monthly spend trend</div>
+        {% if monthly_trend %}
+        <div class="trend-chart">
+            {% for item in monthly_trend %}
+            <div class="trend-bar-col">
+                <div class="trend-bar-amount">₹{{ "%.0f"|format(item.amount) }}</div>
+                <div class="trend-bar-track">
+                    <div class="trend-bar-fill" style="--pct: {{ item.pct }}"></div>
+                </div>
+                <div class="trend-bar-label">{{ item.label }}</div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="reports-empty">No expenses yet in this range.</p>
+        {% endif %}
+    </div>
+
+    <div class="profile-card">
+        <div class="profile-card-title">Spending by category</div>
+        {% if categories %}
+        <div class="reports-category-list">
+            {% for category in categories %}
+            <div class="reports-category-row">
+                <span class="category-badge badge-{{ category.name|lower }}">{{ category.name }}</span>
+                <div class="category-track">
+                    <div class="category-fill pct-{{ category.pct }}"></div>
+                </div>
+                <div class="reports-category-amount">₹{{ "%.2f"|format(category.amount) }}</div>
+                <div class="reports-category-delta {% if category.delta is none %}delta-flat{% elif category.delta > 0 %}delta-up{% else %}delta-down{% endif %}">
+                    {% if category.delta is not none %}{{ "%+d"|format(category.delta) }}%{% else %}—{% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="reports-empty">Nothing to show for this range yet.</p>
+        {% endif %}
+    </div>
+
+</section>
+{% endblock %}

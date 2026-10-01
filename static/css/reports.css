@@ -1,0 +1,158 @@
+/* static/css/reports.css */
+/* Page-specific styles for the Reports page. Shared components          */
+/* (.filter-bar, .stats-row, .stat-box, .profile-card, .category-track,  */
+/* .badge-*) are defined in profile.css and reused here as-is.           */
+
+.reports-section {
+    padding: 3rem 2rem 5rem;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.reports-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.reports-title {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    color: var(--ink);
+    margin-bottom: 0.35rem;
+}
+
+.reports-subtitle {
+    font-size: 0.9rem;
+    color: var(--ink-muted);
+}
+
+.reports-export-btn {
+    white-space: nowrap;
+}
+
+/* Reports needs 4 stat cards where Profile only needs 3 */
+.reports-stats-row {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+/* ------------------------------------------------------------------ */
+/* Monthly trend chart                                                 */
+/* ------------------------------------------------------------------ */
+
+.reports-trend-card { padding-bottom: 1.5rem; }
+
+.trend-chart {
+    display: flex;
+    align-items: flex-end;
+    gap: 1.25rem;
+    height: 180px;
+    padding: 0.5rem 0.5rem 0;
+}
+
+.trend-bar-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    height: 100%;
+    gap: 0.5rem;
+}
+
+.trend-bar-amount {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--ink-muted);
+    font-variant-numeric: tabular-nums;
+}
+
+.trend-bar-track {
+    width: 100%;
+    max-width: 40px;
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+    background: var(--border-soft);
+    border-radius: 6px 6px 0 0;
+    overflow: hidden;
+}
+
+.trend-bar-fill {
+    width: 100%;
+    height: calc(var(--pct) * 1%);
+    background: var(--accent);
+    border-radius: 6px 6px 0 0;
+    animation: reports-grow-bar 0.6s ease;
+}
+
+@keyframes reports-grow-bar {
+    from { height: 0%; }
+}
+
+.trend-bar-label {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--ink-soft);
+}
+
+/* ------------------------------------------------------------------ */
+/* Category breakdown with month-over-month delta                      */
+/* ------------------------------------------------------------------ */
+
+.reports-category-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+}
+
+.reports-category-row {
+    display: grid;
+    grid-template-columns: 130px 1fr 90px 70px;
+    align-items: center;
+    gap: 1rem;
+}
+
+.reports-category-amount {
+    text-align: right;
+    font-size: 0.9rem;
+    color: var(--ink);
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+}
+
+.reports-category-delta {
+    text-align: right;
+    font-size: 0.8rem;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+}
+
+/* Spending down = good (accent green), spending up = bad (danger red) */
+.delta-up { color: var(--danger); }
+.delta-down { color: var(--accent); }
+.delta-flat { color: var(--ink-faint); font-weight: 500; }
+
+.reports-empty {
+    font-size: 0.9rem;
+    color: var(--ink-muted);
+    text-align: center;
+    padding: 1.5rem 0;
+}
+
+@media (max-width: 900px) {
+    .reports-stats-row { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 700px) {
+    .reports-header { flex-direction: column; align-items: stretch; }
+    .reports-export-btn { text-align: center; }
+    .reports-stats-row { grid-template-columns: 1fr; }
+    .reports-category-row { grid-template-columns: 100px 1fr 70px; }
+    .reports-category-delta { display: none; }
+    .trend-chart { gap: 0.75rem; }
+}
